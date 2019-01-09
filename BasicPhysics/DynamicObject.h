@@ -28,6 +28,8 @@ public:
 	virtual void UpdateForces() PURE_VIRTUAL(ADynamicObject::UpdateForces, ); // we don't put an extra as we want to do nothing
 
 
+	static constexpr float cGRAVITY{ 9.81f }; // The constant gravity
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

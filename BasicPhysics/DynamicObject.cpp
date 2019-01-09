@@ -26,6 +26,16 @@ void ADynamicObject::Tick(float DeltaTime)
 
 void ADynamicObject::EulerIntegration(float deltaTime)
 {
-	_velocity += _forces * deltaTime / _mass;
-	_position += deltaTime * _velocity;
+	if (_mass != 0.f)
+	{
+		_acceleration = _forces / _mass;
+		_velocity += _acceleration * deltaTime;
+		// _velocity += _forces * deltaTime / _mass;
+		_position += deltaTime * _velocity;
+	}
+	
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("The mass of this object is 0!"));
+	}
 }
