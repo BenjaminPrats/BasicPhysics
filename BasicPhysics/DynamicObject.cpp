@@ -2,7 +2,6 @@
 
 #include "DynamicObject.h"
 
-
 // Sets default values
 ADynamicObject::ADynamicObject()
 {
@@ -25,3 +24,8 @@ void ADynamicObject::Tick(float DeltaTime)
 
 }
 
+void ADynamicObject::EulerIntegration(float deltaTime)
+{
+	_velocity += _forces * deltaTime / _mass;
+	_position += deltaTime * _velocity;
+}

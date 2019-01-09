@@ -25,3 +25,7 @@ void ADynamicSphere::Tick(float DeltaTime)
 
 }
 
+void ADynamicSphere::UpdateForces()
+{
+
+}
