@@ -16,7 +16,7 @@ class BASICPHYSICS_API UDynamicSphere : public UDynamicObject
 	
 public:
 	// Sets default values for this actor's properties
-	UDynamicSphere() { UDynamicObject(); }
+	UDynamicSphere() : _radius(0.f) { _mass = 0.f; }
 	UDynamicSphere(float mass, float radius) : UDynamicObject(mass), _radius(radius) {}
 
 	void UpdateForces();

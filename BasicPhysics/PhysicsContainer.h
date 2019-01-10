@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "DynamicSphere.h"
+
 #include "PhysicsContainer.generated.h"
 
 UCLASS()
@@ -18,6 +21,10 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere)
+	UDynamicSphere* sphere;
+
 
 public:	
 	// Called every frame

@@ -17,7 +17,7 @@ public:
 	UDynamicObject();
 	explicit UDynamicObject(float mass) : _mass(mass) {}
 
-	//virtual ~ADynamicObject();
+	//virtual ~UDynamicObject();
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -32,6 +32,13 @@ public:
 	static constexpr float cGRAVITY{ 9.81f }; // The constant gravity
 
 protected:
+	UPROPERTY()
+	USceneComponent* root;
+
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* mesh;
+
+
 	// Called when the game starts
 	virtual void BeginPlay() override;	
 

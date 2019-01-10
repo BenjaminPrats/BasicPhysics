@@ -2,6 +2,7 @@
 
 #include "DynamicObject.h"
 
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values for this component's properties
 UDynamicObject::UDynamicObject()
@@ -10,7 +11,10 @@ UDynamicObject::UDynamicObject()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+
+	mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	mesh->AttachTo(root);
 }
 
 
