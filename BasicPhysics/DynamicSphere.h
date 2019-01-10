@@ -2,34 +2,26 @@
 
 #pragma once
 
-//#include "CoreMinimal.h"
-//#include "GameFramework/Actor.h"
-
+#include "CoreMinimal.h"
 #include "DynamicObject.h"
 #include "DynamicSphere.generated.h"
 
+/**
+ * 
+ */
 UCLASS()
-class BASICPHYSICS_API ADynamicSphere : public ADynamicObject
+class BASICPHYSICS_API UDynamicSphere : public UDynamicObject
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	// Sets default values for this actor's properties
-	ADynamicSphere();
-	ADynamicSphere(float mass, float radius) : ADynamicObject(mass), _radius(radius) {}
+	UDynamicSphere() { UDynamicObject(); }
+	UDynamicSphere(float mass, float radius) : UDynamicObject(mass), _radius(radius) {}
 
 	void UpdateForces();
 
-	float _radius = 1.f;
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+	float _radius = 0.f;
 	
 	
 };

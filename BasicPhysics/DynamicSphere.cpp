@@ -2,30 +2,7 @@
 
 #include "DynamicSphere.h"
 
-
-// Sets default values
-ADynamicSphere::ADynamicSphere()
-{
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
-}
-
-// Called when the game starts or when spawned
-void ADynamicSphere::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void ADynamicSphere::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
-void ADynamicSphere::UpdateForces()
+void UDynamicSphere::UpdateForces()
 {
 	_forces = FVector(0.f);
 
@@ -40,3 +17,5 @@ void ADynamicSphere::UpdateForces()
 		_velocity.Z = FGenericPlatformMath::Abs(_velocity.Z); // Not like upper to not be stuck in a loop
 	}
 }
+
+

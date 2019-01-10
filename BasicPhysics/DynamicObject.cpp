@@ -2,29 +2,37 @@
 
 #include "DynamicObject.h"
 
-// Sets default values
-ADynamicObject::ADynamicObject()
-{
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
 
+// Sets default values for this component's properties
+UDynamicObject::UDynamicObject()
+{
+	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
+	// off to improve performance if you don't need them.
+	PrimaryComponentTick.bCanEverTick = true;
+
+	// ...
 }
 
-// Called when the game starts or when spawned
-void ADynamicObject::BeginPlay()
+
+// Called when the game starts
+void UDynamicObject::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// ...
 	
 }
 
-// Called every frame
-void ADynamicObject::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
+// Called every frame
+void UDynamicObject::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	// ...
 }
 
-void ADynamicObject::EulerIntegration(float deltaTime)
+void UDynamicObject::EulerIntegration(float deltaTime)
 {
 	if (_mass != 0.f)
 	{
@@ -33,9 +41,10 @@ void ADynamicObject::EulerIntegration(float deltaTime)
 		// _velocity += _forces * deltaTime / _mass;
 		_position += deltaTime * _velocity;
 	}
-	
+
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT("The mass of this object is 0!"));
 	}
 }
+
