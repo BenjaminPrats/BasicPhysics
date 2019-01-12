@@ -4,27 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-
-#include "DynamicSphere.h"
-
-#include "PhysicsContainer.generated.h"
+#include "SimulationManager.generated.h"
 
 UCLASS()
-class BASICPHYSICS_API APhysicsContainer : public AActor
+class BASICPHYSICS_API ASimulationManager : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APhysicsContainer();
+	ASimulationManager();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere)
-	UDynamicSphere* sphere;
-
 
 public:	
 	// Called every frame

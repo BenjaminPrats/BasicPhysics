@@ -2,7 +2,7 @@
 
 #include "DynamicSphere.h"
 
-void UDynamicSphere::UpdateForces()
+void ADynamicSphere::UpdateForces()
 {
 	_forces = FVector(0.f);
 

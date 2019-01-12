@@ -4,39 +4,34 @@
 
 #include "Components/StaticMeshComponent.h"
 
-// Sets default values for this component's properties
-UDynamicObject::UDynamicObject()
+// Sets default values
+ADynamicObject::ADynamicObject()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 
 	root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = root;
 
 	mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	mesh->AttachTo(root);
 }
 
-
-// Called when the game starts
-void UDynamicObject::BeginPlay()
+// Called when the game starts or when spawned
+void ADynamicObject::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
 	
 }
 
-
 // Called every frame
-void UDynamicObject::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void ADynamicObject::Tick(float DeltaTime)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Super::Tick(DeltaTime);
 
-	// ...
 }
 
-void UDynamicObject::EulerIntegration(float deltaTime)
+void ADynamicObject::EulerIntegration(float deltaTime)
 {
 	if (_mass != 0.f)
 	{
@@ -51,4 +46,3 @@ void UDynamicObject::EulerIntegration(float deltaTime)
 		UE_LOG(LogTemp, Error, TEXT("The mass of this object is 0!"));
 	}
 }
-

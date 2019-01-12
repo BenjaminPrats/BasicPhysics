@@ -3,24 +3,23 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "GameFramework/Actor.h"
 #include "DynamicObject.generated.h"
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BASICPHYSICS_API UDynamicObject : public UActorComponent
+UCLASS()
+class BASICPHYSICS_API ADynamicObject : public AActor
 {
 	GENERATED_BODY()
-
+	
 public:	
-	// Sets default values for this component's properties
-	UDynamicObject();
-	explicit UDynamicObject(float mass) : _mass(mass) {}
+	// Sets default values for this actor's properties
+	ADynamicObject();
+	explicit ADynamicObject(float mass) : _mass(mass) {}
 
 	//virtual ~UDynamicObject();
 
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void Tick(float DeltaTime) override;
 
 	// Updates velocity and position
 	virtual void EulerIntegration(float DeltaTime);
@@ -32,6 +31,7 @@ public:
 	static constexpr float cGRAVITY{ 9.81f }; // The constant gravity
 
 protected:
+
 	UPROPERTY()
 	USceneComponent* root;
 
@@ -40,7 +40,7 @@ protected:
 
 
 	// Called when the game starts
-	virtual void BeginPlay() override;	
+	virtual void BeginPlay() override;
 
 	float _mass = 0.f;
 	FVector _position{ 0.f };
@@ -50,6 +50,5 @@ protected:
 	// Moment of rotation?
 
 	FVector _forces{ 0.f }; // Sum of forces on the gravity center of this object
-		
 	
 };

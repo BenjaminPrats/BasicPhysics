@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class BASICPHYSICS_API UDynamicPlan : public UDynamicObject
+class BASICPHYSICS_API ADynamicPlan : public ADynamicObject
 {
 	GENERATED_BODY()
 	

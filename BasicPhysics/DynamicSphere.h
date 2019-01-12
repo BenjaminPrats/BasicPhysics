@@ -10,14 +10,14 @@
  * 
  */
 UCLASS()
-class BASICPHYSICS_API UDynamicSphere : public UDynamicObject
+class BASICPHYSICS_API ADynamicSphere : public ADynamicObject
 {
 	GENERATED_BODY()
 	
 public:
 	// Sets default values for this actor's properties
-	UDynamicSphere() : _radius(0.f) { _mass = 0.f; }
-	UDynamicSphere(float mass, float radius) : UDynamicObject(mass), _radius(radius) {}
+	ADynamicSphere() : _radius(0.f) { _mass = 0.f; }
+	ADynamicSphere(float mass, float radius) : ADynamicObject(mass), _radius(radius) {}
 
 	void UpdateForces();
 
