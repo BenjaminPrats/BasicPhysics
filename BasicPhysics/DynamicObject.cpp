@@ -21,7 +21,7 @@ ADynamicObject::ADynamicObject()
 void ADynamicObject::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	_position = mesh->GetRelativeTransform().GetLocation();
 }
 
 // Called every frame
@@ -33,14 +33,21 @@ void ADynamicObject::Tick(float DeltaTime)
 
 void ADynamicObject::EulerIntegration(float deltaTime)
 {
+	if (_isStatic)
+		return;
+
 	if (_mass != 0.f)
 	{
 		_acceleration = _forces / _mass;
 		_velocity += _acceleration * deltaTime;
-		// _velocity += _forces * deltaTime / _mass;
+		//_velocity += _forces * deltaTime / _mass;
 		_position += deltaTime * _velocity;
-	}
 
+		UE_LOG(LogTemp, Warning, TEXT("New position: %s"), *_position.ToString());
+
+		mesh->SetRelativeLocation(_position);
+		_position = mesh->GetRelativeTransform().GetLocation();
+	}
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT("The mass of this object is 0!"));

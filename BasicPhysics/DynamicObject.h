@@ -14,7 +14,7 @@ class BASICPHYSICS_API ADynamicObject : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ADynamicObject();
-	explicit ADynamicObject(float mass) : _mass(mass) {}
+	explicit ADynamicObject(float mass) : _mass(mass), _isStatic(false) {}
 
 	//virtual ~UDynamicObject();
 
@@ -27,8 +27,9 @@ public:
 	// Equivalent to sum of forces, acceleration
 	virtual void UpdateForces() PURE_VIRTUAL(ADynamicObject::UpdateForces, ); // we don't put an extra as we want to do nothing
 
-	// TODO: Try to find a way to put this constant in the actor and not the component (so put it in PhysicsContainer)
+	// TODO: Try to find a way to put this constant in the actor and not the component (so put it in SimulationManager)
 	static constexpr float cGRAVITY{ 9.81f }; // The constant gravity
+	static constexpr float cAIR_RESISTANCE{ 1.0f }; // The constant gravity
 
 protected:
 
@@ -42,7 +43,12 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere)
+	bool _isStatic = false;
+
+	UPROPERTY(EditAnywhere)
 	float _mass = 0.f;
+
 	FVector _position{ 0.f };
 	FVector _velocity{ 0.f };
 	FVector _acceleration{ 0.f };
