@@ -19,7 +19,7 @@ public:
 	ADynamicSphere() : _radius(0.f) { _mass = 0.f; }
 	ADynamicSphere(float mass, float radius) : ADynamicObject(mass), _radius(radius) {}
 
-	void UpdateForces();
+	void UpdateForces(float deltaTime);
 
 	float _radius = 0.f;
 	

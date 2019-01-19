@@ -3,6 +3,7 @@
 #include "DynamicObject.h"
 
 #include "Components/StaticMeshComponent.h"
+#include "Runtime/Core/Public/Math/UnrealMathUtility.h"
 
 // Sets default values
 ADynamicObject::ADynamicObject()
@@ -20,15 +21,21 @@ ADynamicObject::ADynamicObject()
 // Called when the game starts or when spawned
 void ADynamicObject::BeginPlay()
 {
+	constexpr float deltaTime = 1.f / 25.f;
 	Super::BeginPlay();
+	
+	// Initialization of the speed and _position
+	UpdatesVelocity(deltaTime);
 	_position = mesh->GetRelativeTransform().GetLocation();
+	// TODO: Useless if we do it anyway in Tick after?
+	UpdatesPosition(deltaTime);
+	mesh->SetRelativeLocation(_position);
 }
 
 // Called every frame
 void ADynamicObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ADynamicObject::EulerIntegration(float deltaTime)
@@ -36,12 +43,11 @@ void ADynamicObject::EulerIntegration(float deltaTime)
 	if (_isStatic)
 		return;
 
-	if (_mass != 0.f)
+	if (_mass != 0.f) // TODO: Remove it later as it should never happen, the constructor handle it to never be 0
 	{
-		_acceleration = _forces / _mass;
-		_velocity += _acceleration * deltaTime;
-		//_velocity += _forces * deltaTime / _mass;
-		_position += deltaTime * _velocity;
+		UpdatesAcceleration();
+		UpdatesVelocity(deltaTime);
+		UpdatesPosition(deltaTime);
 
 		UE_LOG(LogTemp, Warning, TEXT("New position: %s"), *_position.ToString());
 
@@ -50,6 +56,12 @@ void ADynamicObject::EulerIntegration(float deltaTime)
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("The mass of this object is 0!"));
+		UE_LOG(LogTemp, Error, TEXT("The mass of this object is 0, should never happen!"));
 	}
+}
+
+FVector ADynamicObject::UpdatedPosition(float deltaTime)
+{
+	// The constructor handle the case _mass = 0.f
+	return FMath::Square(deltaTime) * _forces / _mass;
 }

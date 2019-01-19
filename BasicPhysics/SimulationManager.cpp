@@ -37,7 +37,7 @@ void ASimulationManager::Tick(float DeltaTime)
 
 	for (auto dObj : dynamicObjects)
 	{
-		dObj->UpdateForces();
+		dObj->UpdateForces(DeltaTime);
 		dObj->EulerIntegration(DeltaTime);
 	}
 
