@@ -14,14 +14,11 @@ class BASICPHYSICS_API ADynamicObject : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ADynamicObject();
-	explicit ADynamicObject(float mass) : _isStatic(false)
+	explicit ADynamicObject(float mass) : _mass(mass), _isStatic(false)
 	{
-		if (mass != 0.f)
+		if (mass == 0.f)
 		{
-			_mass = mass;
-		}
-		else
-		{
+			UE_LOG(LogTemp, Error, TEXT("The mass can't be zero!"));
 			_mass = 1.f;
 		}
 	}
@@ -36,6 +33,10 @@ public:
 
 	// Equivalent to sum of forces, acceleration
 	virtual void UpdateForces(float deltaTime) PURE_VIRTUAL(ADynamicObject::UpdateForces, ); // we don't put an extra as we want to do nothing
+
+	void SetStatic(bool isStatic) { _isStatic = isStatic; }
+
+	ADynamicObject* _nextCollision;
 
 	// TODO: Try to find a way to put this constant in the actor and not the component (so put it in SimulationManager)
 	static constexpr float cGRAVITY{ 9.81f };		// The constant gravity

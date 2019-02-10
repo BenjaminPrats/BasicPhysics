@@ -16,7 +16,7 @@ class BASICPHYSICS_API ADynamicSphere : public ADynamicObject
 	
 public:
 	// Sets default values for this actor's properties
-	ADynamicSphere() : _radius(0.f) { _mass = 0.f; }
+	ADynamicSphere() : _radius(0.f) { _mass = 1.f; }
 	ADynamicSphere(float mass, float radius) : ADynamicObject(mass), _radius(radius) {}
 
 	void UpdateForces(float deltaTime);

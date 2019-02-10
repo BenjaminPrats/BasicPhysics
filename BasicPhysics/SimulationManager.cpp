@@ -42,6 +42,5 @@ void ASimulationManager::Tick(float DeltaTime)
 	}
 
 	
-
 }
 
